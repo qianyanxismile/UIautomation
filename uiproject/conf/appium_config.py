@@ -17,8 +17,8 @@ from appium import webdriver
 def appium_start():
     config = {
         "platformName": "Android",
-        "platformVersion": "8.0.0",
-        "deviceName": "5R4C17B17001096",
+        "platformVersion": "9",
+        "deviceName": "LKX7N18111000507",
         "appPackage": "com.jifen.qukan",
         "appActivity": "com.jifen.qkbase.main.MainActivity",
         "automationName": "UIAutomator2",

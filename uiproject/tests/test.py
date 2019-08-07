@@ -38,7 +38,8 @@ class ProductInformation(unittest.TestCase):
 
     def test_2_close_reward(self):
         """关闭新人红包奖励"""
-        time.sleep(20)
+        time.sleep(5)
+
         # close_reward = self.driver.find_element_by_android_uiautomator('new UiSelector().text({})'.format(self.close_reward))
         close_reward = self.driver.find_element_by_xpath("(//android.widget.TextView[@text='先去逛逛' \
         or @text='暂不更新' \
@@ -51,24 +52,54 @@ class ProductInformation(unittest.TestCase):
 
     def test_3_slide_player(self):
         """滑动当前页，定位播放元素"""
-        shipin_bar = self.driver.find_element_by_xpath("//*[@text='视频' or @text='刷新'")
+        # shipin_bar = self.driver.find_element_by_xpath("//*[@text='视频' or @text='刷新'")
+        shipin_bar = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/\
+        android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/\
+        android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/\
+        android.widget.RelativeLayout[2]/android.widget.FrameLayout/android.widget.Button")
         shipin_bar.click()
-        width = driver.get_window_size()['width']
-        height = driver.get_window_size()['height']
-        i = 0
-        while i < 10:
+        time.sleep(5)
+        width = self.driver.get_window_size()['width']
+        height = self.driver.get_window_size()['height']
+        # i = 0
+        # while i< 10:
+        #     i = i+1
+        for _ in range(10):
             try:
                 """//hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/*/*/android.widget.ImageView[@clickable=\"true\"] | //hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/*/android.widget.ImageView[@clickable=\"true\"]")
 """
 
                 """/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.RelativeLayout/android.view.View/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ImageView
 """
-                res = self.driver.find_element_by_class_name("android.widget.ImageView")
-                res.click()#
-                time.sleep(30)
+                #res = self.driver.find_elements_by_android_uiautomator('new UiSelector().resourceId("com.jifen.qukan:id/iv_play")')
+                #res[0].click()
+                self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/\
+                android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/\
+                android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.RelativeLayout/\
+                android.support.v4.view.ViewPager/android.widget.RelativeLayout/android.view.ViewGroup/\
+                android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]/\
+                android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ImageView")
+                print(type(res))
+                print(res)
+                res[0].click()
+                print(res[0].text)
+                time.sleep(20)
                 break
             except Exception as e:
-                driver.swipe(width / 2, height * 0.8, width / 2, height * 0.2)  # 滑动屏幕
+                self.driver.swipe(width / 2, height * 0.8, width / 2, height * 0.2)  # 滑动屏幕
+                res = self.driver.find_elements_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/\
+                android.widget.LinearLayout/android.widget.ImageView")
+
+                /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/\
+                  android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.RelativeLayout/android.support.v4.view.ViewPager/android.widget.RelativeLayout / android.view.ViewGroup/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/ \
+                  android.widget.LinearLayout[1]/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.TextView
+
+
+                print(type(res))
+                print(res)
+                res[0].click()
+                print(res[0].text)
+                time.sleep(20)
 
     @classmethod
     def tearDownClass(cls):
@@ -78,9 +109,9 @@ class ProductInformation(unittest.TestCase):
 # texture Testcase
 def suite():
     suite_case = unittest.TestSuite()
-    # suite.addTest(ProductInformation('test_1_tel_authorize'))  # 需要测试的用例就addTest，不加的就不会运行
-    suite.addTest(ProductInformation('test_2_close_reward'))
-    suite.addTest(ProductInformation('test_3_slide_player'))
+    #suite_case.addTest(ProductInformation('test_1_tel_authorize'))  # 需要测试的用例就addTest，不加的就不会运行
+    #suite_case.addTest(ProductInformation('test_2_close_reward'))
+    suite_case.addTest(ProductInformation('test_3_slide_player'))
 
     return suite_case
 
